@@ -1,0 +1,350 @@
+	Python Overall Test 
+
+Section A – 1 Mark Questions (20 × 1 = 20 Marks)
+1. Which variable name is valid?
+a) 1name
+b) my_name
+c) class
+d) my-name
+ans:b)my_name
+
+2. What is the output?
+x = 10
+y = x
+x = 20
+print(y)
+ans:10
+
+3. What is the output?
+print(type(10.5))
+ans:<class'float'>
+
+4. Which function converts a string into an integer?
+a) str()
+b) int()
+c) float()
+d) bool()
+ans:b)int()
+
+5. What is the output?
+print(10 // 3)
+ans:3
+
+6. What is the output?
+print(2 ** 3)
+ans:8
+
+7. Which function call uses only positional arguments?
+a) add(a=10, b=20)
+b) add(10, 20)
+c) add(a=10, 20)
+d) None
+ans:b)add(10, 20)
+
+8. What is the output?
+def greet(name):
+    print("Hello", name)
+greet("Deepak")
+o/p:Hello Deepak
+
+9. What is the output?
+text = "Python"
+print(text[2])
+o/p:t
+
+10. What is the output?
+print("Hello" * 2)
+o/p:HelloHello
+
+11. What is the output?
+print(len("Python"))
+o/p:6
+
+12. What is the output?
+print("python".upper())
+o/p:PYTHON
+
+13. Which method converts all letters into lowercase?
+a) lower()
+b) upper()
+c) capitalize()
+d) title()
+ans:c)capitalize()
+
+14. Predict the Output
+a = 5
+b = 2
+print(a % b)
+o/p:1
+
+15. print(bool(""))
+ans:false
+
+16. Which OOP pillar is demonstrated when a Dog object and a Cat object respond differently to the same makeSound() method call?
+A) Encapsulation
+B) Inheritance
+C) Polymorphism
+D) Abstraction
+ans:C) Polymorphism
+
+17. x = "10" 
+    print(int(x) + 5)
+ans:15
+
+18. print(type(True))
+ans:boolean
+
+19. print(5 > 3 and 8 > 10)
+ans:false
+
+20. print("ABC"[1])
+ans:B
+
+Section B – 2 Marks (10 × 2 = 20 Marks)
+21. Write a Python program to print numbers from 1 to 10 using a for loop.
+
+for i in range(1, 11):
+    print(i)
+
+22. Write a program to print even numbers between 1 and 20.
+
+for i in range(2, 21, 2):
+    print(i)
+
+23. Which mode is used to read a file? Explain.
+
+r
+Explanation:
+=>"r" means Read Mode.
+=>It is used to open an existing file for reading.
+=>If the file does not exist, Python gives an error.
+
+24. Write a Python program to create a file and write "Welcome to Python" into it.
+
+file = open("sample.txt", "w")
+file.write("Welcome to Python")
+file.close()
+
+25. What is Exception Handling? Why is it used?
+
+Exception Handling is used to handle errors in a program without stopping its execution.
+
+Why is it used?
+=>Prevents the program from crashing.
+=>Displays a meaningful error message.
+=>Makes the program more reliable.
+
+26. Write a program using try-except to handle division by zero.
+
+try:
+    a = 5
+    b = 0
+    print(a / b)
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+
+27. Write a function that accepts two numbers and returns their sum.
+
+def add(a, b):
+    return a + b
+
+result = add(10, 20)
+print(result)
+
+28. Explain the difference between break, continue, and pass.
+
+break:
+=>immediate exit control loop
+continue:
+=>skip the current iteration
+pass:
+=>pass does nothing,The loop continues normally.
+
+29. a. What is a generator? Which keyword is used to create a generator?
+    b. How to iterate through a generator using loops or the next() function?
+
+a.A generator is a special function that produces values one at a time instead of all at once.
+Keyword used: yield
+
+b.Using a for loop
+def numbers():
+    yield 1
+    yield 2
+    yield 3
+
+for i in numbers():
+    print(i)
+
+Using next()
+def numbers():
+    yield 1
+    yield 2
+    yield 3
+
+g = numbers()
+
+print(next(g))
+print(next(g))
+print(next(g))
+
+=>next() gets the next value from the generator.
+
+30. What is a module? Write any two built-in modules in Python.
+
+A module is a Python file that contains functions, classes, and variables. It helps organize and reuse code.
+
+=>Two built-in modules:
+math
+random
+
+Section C – Programming (6 × 5 = 30 Marks)
+1.State  Pillars of Oops. Explain one Concept with Sample Program
+
+=>The Four Pillars of OOPs
+Encapsulation
+Abstraction
+Inheritance
+Polymorphism
+Encapsulation (Explanation)
+
+=>Definition:
+Encapsulation is the process of wrapping data (variables) and methods (functions) into a single unit called a class. It also helps protect data by restricting direct access.
+
+sample program
+class Student:
+    def __init__(self, name, marks):
+        self.name = name
+        self.__marks = marks    # Private variable
+
+    def display(self):
+        print("Name:", self.name)
+        print("Marks:", self.__marks)
+
+# Creating object
+s1 = Student("Ravi", 95)
+
+# Calling method
+s1.display()
+ 
+2. OOPS
+Create a class Calculator with methods:
+add()
+subtract()
+Create an object and call both methods.
+
+class Calculator:
+
+    def add(self, a, b):
+        print("Addition =", a + b)
+
+    def subtract(self, a, b):
+        print("Subtraction =", a - b)
+
+obj = Calculator()
+
+obj.add(20, 10)
+obj.subtract(20, 10)
+
+3. Function Types - Write Python programs for the following function types:
+1.function without argument and without return
+
+def Tamilnadu():
+    print(" Tamilnadu is the best state for visiting")
+Tamilnadu()
+
+2.function with argument and without return
+
+def greet_user(username):
+    print(f"Hello, {username}! welcome back.")
+greet_user("Thamizhisai")
+
+3.function with argument and with return
+Addition:
+def add(a,b):
+    return(a+b)
+#res=add(10,20)
+print(res)
+print(add(10,20))
+
+4.function without argument and with return
+def square():
+    num=5
+    return num * num
+result = square()
+print(result)
+
+
+4. Collections
+Write short notes with one example each for:
+List,Tuple,Set,Dictionary
+list:
+=>ordered
+=>allow duplicate
+=>heterogeneous data
+=>mutuable
+ex:
+thislist = ["banana", "cherry", "apple"]
+print(thislist)
+
+Tuple:
+=>ordered
+=>allow duplicate
+=>heterogeneous data
+=>immutable
+ex:
+num = (20, 40, 100)
+print(num)
+
+set:
+=>ordered
+=>not allow duplicate
+=>mutable
+=>keys are unique so allow duplicate
+ex:
+students = {"Ravi", "Priya", "tamil", "Ravi"}
+print(students)
+
+dictionary:
+=>ordered
+=>mutable
+=>keys are unique so allow duplicate
+ex:
+student = {
+    "name": "Tamil",
+    "age": 20,
+    "course": "python"
+}
+
+print(student)
+
+
+5. Exception Handling
+    Write a Python program that:
+    Accepts two numbers from the user.
+    Divides the first number by the second.
+    Handles division by zero using try-except.
+
+try:
+    a = int(input("Enter first number: "))
+    b = int(input("Enter second number: "))
+    result = a / b
+    print("Answer =", result)
+    except ZeroDivisionError:
+    print("Cannot divide by zero")
+
+6. Loop + Condition
+Write a Python program to:
+    Accept a number from the user.
+    Check whether the number is Even or Odd.
+    If the number is even, print all even numbers from 1 to that number.
+    If the number is odd, print all odd numbers from 1 to that number.
+
+num = int(input("Enter a number: "))
+if num % 2 == 0:
+    print("Even Number")
+     for i in range(2, num + 1, 2)://2 represent even values
+        print(i)
+else:
+    print("Odd Number")
+     for i in range(1, num + 1, 2)://1 represent odd values
+        print(i)

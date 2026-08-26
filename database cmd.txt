@@ -1,0 +1,412 @@
+-- ============================================================
+-- FOODIEHUB DATABASE CHECKING COMMANDS
+-- Purpose:
+-- These commands are only for viewing and verifying data.
+-- They do NOT INSERT, UPDATE, or DELETE anything.
+-- ============================================================
+
+
+-- ============================================================
+-- 1. SELECT THE DATABASE
+-- ============================================================
+-- Tells MySQL that we want to work with the foodiehub database.
+
+USE foodiehub;
+
+
+-- ============================================================
+-- 2. CHECK WHICH DATABASE IS CURRENTLY SELECTED
+-- ============================================================
+-- Shows the database currently being used.
+
+SELECT DATABASE();
+
+
+-- ============================================================
+-- 3. SHOW ALL TABLES
+-- ============================================================
+-- Displays all tables available inside the foodiehub database.
+
+SHOW TABLES;
+
+
+-- ============================================================
+-- 4. CHECK ALL RESTAURANTS
+-- ============================================================
+-- Shows restaurant ID, name, rating, location and image.
+-- Useful for checking restaurant details.
+
+SELECT
+    id,
+    name,
+    rating,
+    location,
+    image
+FROM crisp_restaurant
+ORDER BY id;
+
+
+-- ============================================================
+-- 5. CHECK ALL FOOD / MENU ITEMS
+-- ============================================================
+-- Shows every food item with its restaurant ID.
+-- restaurant_id tells us which restaurant owns the food.
+
+SELECT
+    id,
+    name,
+    price,
+    restaurant_id,
+    image
+FROM crisp_food
+ORDER BY restaurant_id, id;
+
+
+-- ============================================================
+-- 6. CHECK HOW MANY RESTAURANTS EXIST
+-- ============================================================
+-- Expected result in your current project: 9
+
+SELECT COUNT(*) AS total_restaurants
+FROM crisp_restaurant;
+
+
+-- ============================================================
+-- 7. CHECK HOW MANY FOOD ITEMS EXIST
+-- ============================================================
+-- Expected result in your current project: 54
+
+SELECT COUNT(*) AS total_foods
+FROM crisp_food;
+
+
+-- ============================================================
+-- 8. CHECK DOMINO'S PIZZA MENU
+-- ============================================================
+-- restaurant_id = 1 is Domino's Pizza.
+-- This shows only Domino's food items.
+
+SELECT
+    id,
+    name,
+    price,
+    image
+FROM crisp_food
+WHERE restaurant_id = 1
+ORDER BY id;
+
+
+-- ============================================================
+-- 9. CHECK PIZZA HUT MENU
+-- ============================================================
+-- restaurant_id = 2 is Pizza Hut.
+
+SELECT
+    id,
+    name,
+    price,
+    image
+FROM crisp_food
+WHERE restaurant_id = 2
+ORDER BY id;
+
+
+-- ============================================================
+-- 10. CHECK BURGER KING MENU
+-- ============================================================
+-- restaurant_id = 3 is Burger King.
+
+SELECT
+    id,
+    name,
+    price,
+    image
+FROM crisp_food
+WHERE restaurant_id = 3
+ORDER BY id;
+
+
+-- ============================================================
+-- 11. CHECK CAKE WORLD MENU
+-- ============================================================
+-- restaurant_id = 4 is Cake World.
+
+SELECT
+    id,
+    name,
+    price,
+    image
+FROM crisp_food
+WHERE restaurant_id = 4
+ORDER BY id;
+
+
+-- ============================================================
+-- 12. CHECK BIRYANI HOUSE MENU
+-- ============================================================
+-- restaurant_id = 5 is Biryani House.
+
+SELECT
+    id,
+    name,
+    price,
+    image
+FROM crisp_food
+WHERE restaurant_id = 5
+ORDER BY id;
+
+
+-- ============================================================
+-- 13. CHECK CHENNAI CAFE MENU
+-- ============================================================
+-- restaurant_id = 6 is Chennai Cafe.
+
+SELECT
+    id,
+    name,
+    price,
+    image
+FROM crisp_food
+WHERE restaurant_id = 6
+ORDER BY id;
+
+
+-- ============================================================
+-- 14. CHECK RAMAN RESTAURANT MENU
+-- ============================================================
+-- restaurant_id = 15 is Raman Restaurant.
+
+SELECT
+    id,
+    name,
+    price,
+    image
+FROM crisp_food
+WHERE restaurant_id = 15
+ORDER BY id;
+
+
+-- ============================================================
+-- 15. CHECK TANDOORI FLAMES MENU
+-- ============================================================
+-- restaurant_id = 16 is Tandoori Flames.
+
+SELECT
+    id,
+    name,
+    price,
+    image
+FROM crisp_food
+WHERE restaurant_id = 16
+ORDER BY id;
+
+
+-- ============================================================
+-- 16. CHECK MEXICAN FIESTA MENU
+-- ============================================================
+-- restaurant_id = 17 is Mexican Fiesta.
+
+SELECT
+    id,
+    name,
+    price,
+    image
+FROM crisp_food
+WHERE restaurant_id = 17
+ORDER BY id;
+
+
+-- ============================================================
+-- 17. CHECK ONE PARTICULAR FOOD
+-- ============================================================
+-- Example: ID 302 is Mutton Biryani.
+-- Useful when you have changed an image or price
+-- and want to verify only that item.
+
+SELECT
+    id,
+    name,
+    price,
+    image,
+    restaurant_id
+FROM crisp_food
+WHERE id = 302;
+
+
+-- ============================================================
+-- 18. CHECK CHICKEN 65
+-- ============================================================
+-- Example: ID 304 is Chicken 65.
+
+SELECT
+    id,
+    name,
+    price,
+    image,
+    restaurant_id
+FROM crisp_food
+WHERE id = 304;
+
+
+-- ============================================================
+-- 19. CHECK FOR DUPLICATE RESTAURANT NAMES
+-- ============================================================
+-- Finds restaurants with the same name more than once.
+-- Expected result: Empty set
+
+SELECT
+    name,
+    COUNT(*) AS total
+FROM crisp_restaurant
+GROUP BY name
+HAVING COUNT(*) > 1;
+
+
+-- ============================================================
+-- 20. CHECK FOR DUPLICATE FOOD NAMES
+-- ============================================================
+-- Checks whether the same food exists more than once
+-- inside the same restaurant.
+-- Expected result: Empty set
+
+SELECT
+    restaurant_id,
+    name,
+    COUNT(*) AS total
+FROM crisp_food
+GROUP BY restaurant_id, name
+HAVING COUNT(*) > 1;
+
+
+-- ============================================================
+-- 21. CHECK RESTAURANT + FOOD RELATIONSHIP
+-- ============================================================
+-- Joins both tables so you can clearly see:
+-- Food name + Restaurant name + Price.
+
+SELECT
+    f.id AS food_id,
+    f.name AS food_name,
+    f.price,
+    r.id AS restaurant_id,
+    r.name AS restaurant_name
+FROM crisp_food f
+JOIN crisp_restaurant r
+    ON f.restaurant_id = r.id
+ORDER BY r.id, f.id;
+
+
+-- ============================================================
+-- 22. CHECK HOW MANY FOODS EACH RESTAURANT HAS
+-- ============================================================
+-- Shows the number of menu items belonging to each restaurant.
+
+SELECT
+    r.id AS restaurant_id,
+    r.name AS restaurant_name,
+    COUNT(f.id) AS total_foods
+FROM crisp_restaurant r
+LEFT JOIN crisp_food f
+    ON r.id = f.restaurant_id
+GROUP BY r.id, r.name
+ORDER BY r.id;
+
+
+-- ============================================================
+-- 23. CHECK FOR FOODS WITHOUT A VALID RESTAURANT
+-- ============================================================
+-- Finds food records whose restaurant relationship
+-- does not match a restaurant.
+-- Normally this should return Empty set.
+
+SELECT
+    f.id,
+    f.name,
+    f.restaurant_id
+FROM crisp_food f
+LEFT JOIN crisp_restaurant r
+    ON f.restaurant_id = r.id
+WHERE r.id IS NULL;
+
+
+-- ============================================================
+-- 24. CHECK ALL FOOD DETAILS INCLUDING AVAILABILITY
+-- ============================================================
+-- Useful for checking price, category, availability
+-- and restaurant relationship.
+
+SELECT
+    id,
+    name,
+    price,
+    category,
+    is_available,
+    restaurant_id
+FROM crisp_food
+ORDER BY restaurant_id, id;
+
+
+-- ============================================================
+-- 25. CHECK ORDERS
+-- ============================================================
+-- Shows customer orders.
+-- This is only a SELECT, so it does not modify orders.
+
+SELECT *
+FROM crisp_order
+ORDER BY id;
+
+
+-- ============================================================
+-- 26. CHECK ORDER ITEMS
+-- ============================================================
+-- Shows individual items belonging to orders.
+
+SELECT *
+FROM crisp_orderitem
+ORDER BY id;
+
+
+-- ============================================================
+-- 27. CHECK USERS
+-- ============================================================
+-- Shows registered Django users.
+
+SELECT
+    id,
+    username,
+    email
+FROM auth_user
+ORDER BY id;
+
+
+-- ============================================================
+-- 28. CHECK TABLE STRUCTURE
+-- ============================================================
+-- DESCRIBE shows columns, data types, keys and defaults.
+-- Useful for understanding the database structure.
+
+DESCRIBE crisp_restaurant;
+
+DESCRIBE crisp_food;
+
+
+-- ============================================================
+-- 29. CHECK RESTAURANT UNIQUE CONSTRAINT
+-- ============================================================
+-- Shows indexes/constraints on crisp_restaurant.
+-- You should see the unique restaurant-name constraint.
+
+SHOW INDEX
+FROM crisp_restaurant;
+
+
+-- ============================================================
+-- 30. CHECK FOOD UNIQUE CONSTRAINT
+-- ============================================================
+-- Shows indexes/constraints on crisp_food.
+-- You should see the unique constraint on:
+-- (restaurant_id, name)
+
+SHOW INDEX
+FROM crisp_food;
